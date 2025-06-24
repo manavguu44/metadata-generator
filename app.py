@@ -5,8 +5,15 @@ import pytesseract
 import spacy
 from keybert import KeyBERT
 import json
+import spacy
+try:
+    nlp = spacy.load("en_core_web_sm")
+except OSError:
+    # Automatically download the model if not found
+    from spacy.cli import download
+    download("en_core_web_sm")
+    nlp = spacy.load("en_core_web_sm")
 
-nlp = spacy.load("en_core_web_sm")
 kw_model = KeyBERT()
 
 def extract_text_pdf(path):
